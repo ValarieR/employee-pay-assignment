@@ -40,7 +40,7 @@ $(document).ready(function () {
         console.log(role);
         console.log(startDate);
         console.log(monthlyRate);
-        
+
         // Send data to firebase
         database.ref('/Activity17').push({
             name: name,
@@ -52,11 +52,36 @@ $(document).ready(function () {
 
     });
     // Update screen with data
-    database.ref('/Activity17').orderByChild("dateAdded").limitToLast(1).on("child_added", function (snapshot) {
+    database.ref('/Activity17').orderByChild("dateAdded").limitToLast(5).on("child_added", function (snapshot) {
 
         var sv = snapshot.val();
 
-        console.log(sv);
+       // console.log(sv);
+
+        console.log(sv.name);
+
+        var tTr = $("<tr>");
+
+        var tTd = $("<td>");
+        tTd.append(sv.name);
+        tTr.append(tTd);
+
+        tTd = $("<td>");
+        tTd.append(sv.role);
+        tTr.append(tTd);
+
+
+        tTd = $("<td>");
+        tTd.append(sv.startDate);
+        tTr.append(tTd);
+
+        tTd = $("<td>");
+        tTd.append(sv.monthlyRate);
+        tTr.append(tTd);
+
+
+        $("#employee-table").append(tTr);
+
     })
 
 
