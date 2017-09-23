@@ -21,6 +21,9 @@ $(document).ready(function () {
     var startDate ;
     var monthlyRate ;
 
+    var monthlyRateCalc ;
+    var totalBilled ;
+
 
     // on submit button do this
     $("#add-new").on("click", function () {
@@ -36,7 +39,11 @@ $(document).ready(function () {
         startDate = $("#start-date-input").val().trim();
         monthlyRate = $("#monthly-rate-input").val().trim();
 
-        console.log(newobj);
+        console.log(name);
+        console.log(role);
+        console.log(startDate);
+        console.log(monthlyRate);
+
         // Send data to firebase
         database.ref('/Activity17').push({
             name: name,
@@ -46,13 +53,53 @@ $(document).ready(function () {
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
 
+        //Clear input fields
+        $('#name-input').val("");
+        $('#role-input').val("");
+        $('#start-date-input').val("");
+        $('#monthly-rate-input').val("");
+
+
     });
     // Update screen with data
-    database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function (snapshot) {
+    database.ref('/Activity17').orderByChild("dateAdded").limitToLast(5).on("child_added", function (snapshot) {
 
         var sv = snapshot.val();
 
-        console.log(sv);
+       // console.log(sv);
+
+        console.log(sv.name);
+
+        var tTr = $("<tr>");
+
+        var tTd = $("<td>");
+        tTd.append(sv.name);
+        tTr.append(tTd);
+
+        tTd = $("<td>");
+        tTd.append(sv.role);
+        tTr.append(tTd);
+
+
+        tTd = $("<td>");
+        tTd.append(sv.startDate);
+        tTr.append(tTd);
+
+        tTd = $("<td>");
+        tTd.append(sv.monthlyRate);
+        tTr.append(tTd);
+
+        tTd = $("<td>");
+        tTd.append(monthlyRateCalc);
+        tTr.append(tTd);
+
+        tTd = $("<td>");
+        tTd.append(totalBilled);
+        tTr.append(tTd);
+
+
+        $("#employee-table-body").append(tTr);
+
     })
 
 
