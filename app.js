@@ -21,6 +21,9 @@ $(document).ready(function () {
     var startDate ;
     var monthlyRate ;
 
+    var monthlyRateCalc ;
+    var totalBilled ;
+
 
     // on submit button do this
     $("#add-new").on("click", function () {
@@ -49,6 +52,13 @@ $(document).ready(function () {
             monthlyRate: monthlyRate,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
+
+        //Clear input fields
+        $('#name-input').val("");
+        $('#role-input').val("");
+        $('#start-date-input').val("");
+        $('#monthly-rate-input').val("");
+
 
     });
     // Update screen with data
@@ -79,8 +89,16 @@ $(document).ready(function () {
         tTd.append(sv.monthlyRate);
         tTr.append(tTd);
 
+        tTd = $("<td>");
+        tTd.append(monthlyRateCalc);
+        tTr.append(tTd);
 
-        $("#employee-table").append(tTr);
+        tTd = $("<td>");
+        tTd.append(totalBilled);
+        tTr.append(tTd);
+
+
+        $("#employee-table-body").append(tTr);
 
     })
 
