@@ -70,6 +70,12 @@ $(document).ready(function () {
     //Function to Calculate months worked
     function calcMonthsWorked() {
         // monthsWorked =
+        console.log("Start Date: " + sv.startDate);
+        console.log("Current Date: " + moment().format("YYYY-MM-DD"));
+
+        var currentDate = moment().format("YYYY-MM-DD");
+        monthsWorked = moment(currentDate).diff(moment(sv.startDate), 'months');
+        console.log(monthsWorked);
     }
 
     // Load data from firebase add data to employee table
