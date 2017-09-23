@@ -14,31 +14,29 @@ $(document).ready(function () {
     var database = firebase.database();
 
     // Initialize Global Variables
-    var obj = {};
+    var sv;
 
-    var name ;
-    var role ;
-    var startDate ;
-    var monthlyRate ;
+    var name;
+    var role;
+    var startDate;
+    var monthlyRate;
 
-    var monthlyRateCalc ;
-    var totalBilled ;
+    var monthsWorked;
+    var totalBilled;
 
 
     // on submit button do this
     $("#add-new").on("click", function () {
-
-        console.log("add-new");
         // Don't refresh the page!
         event.preventDefault();
 
         // Grab data input
-        //var newobj = {};
         name = $("#name-input").val().trim();
         role = $("#role-input").val().trim();
         startDate = $("#start-date-input").val().trim();
         monthlyRate = $("#monthly-rate-input").val().trim();
 
+        // Check that data was grabbed correctly
         console.log(name);
         console.log(role);
         console.log(startDate);
@@ -54,22 +52,41 @@ $(document).ready(function () {
         });
 
         //Clear input fields
+        clearInputs();
+    });
+
+    function clearInputs() {
         $('#name-input').val("");
         $('#role-input').val("");
         $('#start-date-input').val("");
         $('#monthly-rate-input').val("");
+    }
 
+    //Function to Calculate total billed
+    function calcTotalBilled() {
+        totalBilled = monthsWorked * parseInt(sv.monthlyRate);
+    }
 
-    });
-    // Update screen with data
+    //Function to Calculate months worked
+    function calcMonthsWorked() {
+        // monthsWorked =
+    }
+
+    // Load data from firebase add data to employee table
     database.ref('/Activity17').orderByChild("dateAdded").limitToLast(5).on("child_added", function (snapshot) {
+        // Store data in variable sv
+        sv = snapshot.val();
 
-        var sv = snapshot.val();
+        // Check that data was loaded correctly
+        console.log(sv);
 
-       // console.log(sv);
+        //Calculate months worked
+        calcMonthsWorked();
 
-        console.log(sv.name);
+        //Calculate total billed
+        calcTotalBilled();
 
+        //Create Rows for employee table
         var tTr = $("<tr>");
 
         var tTd = $("<td>");
@@ -80,9 +97,12 @@ $(document).ready(function () {
         tTd.append(sv.role);
         tTr.append(tTd);
 
-
         tTd = $("<td>");
         tTd.append(sv.startDate);
+        tTr.append(tTd);
+
+        tTd = $("<td>");
+        tTd.append(monthsWorked);
         tTr.append(tTd);
 
         tTd = $("<td>");
@@ -90,18 +110,11 @@ $(document).ready(function () {
         tTr.append(tTd);
 
         tTd = $("<td>");
-        tTd.append(monthlyRateCalc);
-        tTr.append(tTd);
-
-        tTd = $("<td>");
         tTd.append(totalBilled);
         tTr.append(tTd);
 
-
+        //Append New rows to employee tables body
         $("#employee-table-body").append(tTr);
-
     })
-
-
 })
 ;

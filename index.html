@@ -4,16 +4,17 @@
 <head>
     <title>Time Sheet</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Link to jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Google Font Link -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
     <!-- Link to CSS File -->
     <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Link to Firebase JS File -->
     <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
 </head>
-
 <body>
 <div class="container">
     <div class="jumbotron black">
@@ -36,7 +37,7 @@
                     <th>Total Billed</th>
                 </tr>
                 </thead>
-              <tbody id="employee-table-body"> </tbody>
+                <tbody id="employee-table-body"></tbody>
             </table>
         </div>
     </div>
@@ -45,27 +46,25 @@
             <h3 class="panel-title white">Add Employee</h3>
         </div>
         <div class="panel-body">
-        	<div class="form-group">
-        		<label>Employee Name</label>
-            		<input type="text" class="form-control" placeholder="Name" id="name-input">
-            		<br>
-        		<label>Role</label>
-            		<input type="text" class="form-control" placeholder="Role" id="role-input">
-            		<br>
-
-        		<label>Starting Date</label>
-            		<input id="start-date-input" type="date" class="form-control" placeholder="MM/DD/YY">
-        		<label>Monthly Rate</label>
-            		<input type="number" class="form-control" placeholder="Monthly Rate" id="monthly-rate-input">
-            		<br>
-        		<input class="btn btn-default black" type="submit" value="Submit" id="add-new">
-        	</div>
-
+            <div class="form-group">
+                <label>Employee Name</label>
+                <input type="text" class="form-control" placeholder="Name" id="name-input">
+                <br>
+                <label>Role</label>
+                <input type="text" class="form-control" placeholder="Role" id="role-input">
+                <br>
+                <label>Starting Date</label>
+                <input id="start-date-input" type="date" class="form-control" placeholder="MM/DD/YY">
+                <br>
+                <label>Monthly Rate</label>
+                <input type="number" class="form-control" placeholder="Monthly Rate" id="monthly-rate-input">
+                <br>
+                <input class="btn btn-default black" type="submit" value="Submit" id="add-new">
+            </div>
         </div>
     </div>
 </div>
-
+<!-- Link to JS File -->
 <script src="app.js"></script>
 </body>
-
 </html>
