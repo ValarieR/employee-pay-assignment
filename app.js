@@ -36,7 +36,11 @@ $(document).ready(function () {
         startDate = $("#start-date-input").val().trim();
         monthlyRate = $("#monthly-rate-input").val().trim();
 
-        console.log(newobj);
+        console.log(name);
+        console.log(role);
+        console.log(startDate);
+        console.log(monthlyRate);
+        
         // Send data to firebase
         database.ref('/Activity17').push({
             name: name,
@@ -48,7 +52,7 @@ $(document).ready(function () {
 
     });
     // Update screen with data
-    database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function (snapshot) {
+    database.ref('/Activity17').orderByChild("dateAdded").limitToLast(1).on("child_added", function (snapshot) {
 
         var sv = snapshot.val();
 
