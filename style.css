@@ -1,8 +1,9 @@
-.black {
+.panel-default > .black {
 	background-color: black;
 	color: white;
 }
 
-.white {
+.black {
+	background-color: black;
 	color: white;
 }
