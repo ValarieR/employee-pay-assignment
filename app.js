@@ -16,6 +16,11 @@ $(document).ready(function () {
     // Initialize Global Variables
     var obj = {};
 
+    var name ;
+    var role ;
+    var startDate ;
+    var monthlyRate ;
+
 
     // on submit button do this
     $("#add-new").on("click", function () {
@@ -25,21 +30,25 @@ $(document).ready(function () {
         event.preventDefault();
 
         // Grab data input
-        var newobj = {};
-        newobj.name = $("#name-input").val().trim();
-        newobj.role = $("#role-input").val().trim();
-        newobj.startDate = $("#start-date-input").val().trim();
-        newobj.monthlyRate = $("#monthly-rate-input").val().trim();
+        //var newobj = {};
+        name = $("#name-input").val().trim();
+        role = $("#role-input").val().trim();
+        startDate = $("#start-date-input").val().trim();
+        monthlyRate = $("#monthly-rate-input").val().trim();
 
         console.log(newobj);
         // Send data to firebase
         database.ref('/Activity17').push({
-            data: newobj
+            name: name,
+            role: role,
+            startDate: startDate,
+            monthlyRate: monthlyRate,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
 
     });
     // Update screen with data
-    database.ref().orderByChild("startDate").limitToLast(1).on("child_added", function (snapshot) {
+    database.ref().orderByChild("dateAdded").limitToLast(1).on("child_added", function (snapshot) {
 
         var sv = snapshot.val();
 
