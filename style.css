@@ -1,3 +1,9 @@
+.panel-default > .black {
+	background-color: black;
+	color: white;
+}
+
 .black {
-	color: black;
+	background-color: black;
+	color: white;
 }
