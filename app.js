@@ -18,8 +18,9 @@ $(document).ready(function () {
 
 
     // on submit button do this
-    $("#").on("click", function () {
+    $("#add-new").on("click", function () {
 
+        console.log("add-new");
         // Don't refresh the page!
         event.preventDefault();
 
@@ -30,14 +31,21 @@ $(document).ready(function () {
         newobj.startDate = $("#start-date-input").val().trim();
         newobj.monthlyRate = $("#monthly-rate-input").val().trim();
 
+        console.log(newobj);
         // Send data to firebase
-        database.ref('/Activity17').set({
+        database.ref('/Activity17').push({
             data: newobj
         });
-        // Update screen with data
-
 
     });
+    // Update screen with data
+    database.ref().orderByChild("startDate").limitToLast(1).on("child_added", function (snapshot) {
+
+        var sv = snapshot.val();
+
+        console.log(sv);
+    })
+
 
 })
 ;
